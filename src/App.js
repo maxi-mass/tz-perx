@@ -7,6 +7,7 @@ import Typography from "@material-ui/core/Typography";
 import Main from "./components/Main/Main";
 import Cart from "./components/Cart/Cart";
 
+
 const App = () => {
   return (
     <div>

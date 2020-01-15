@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -47,7 +48,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function Navbar() {
+const Navbar = () => {
+  const [cartCount, setCartCount] = useState(0);
+  const cartItems = useSelector(state => state.good.cart).length;
+  useEffect(() => {
+    const saved = JSON.parse(localStorage.getItem("cart") || "[]");
+    setCartCount(saved.length);
+  }, []);
+
   const classes = useStyles();
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -73,7 +81,7 @@ export default function Navbar() {
     >
       <MenuItem>
         <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={11} color="secondary">
+          <Badge badgeContent={cartItems} color="secondary">
             <ShoppingCartIcon />
           </Badge>
         </IconButton>
@@ -92,7 +100,7 @@ export default function Navbar() {
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={17} color="secondary">
+              <Badge badgeContent={cartItems} color="secondary">
                 <ShoppingCartIcon />
               </Badge>
             </IconButton>
@@ -113,4 +121,6 @@ export default function Navbar() {
       {renderMobileMenu}
     </div>
   );
-}
+};
+
+export default Navbar;
