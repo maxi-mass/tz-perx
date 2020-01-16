@@ -55,6 +55,7 @@ const useStyles = makeStyles(theme => ({
 
 const Navbar = () => {
   const cartTotal = useSelector(state => state.good.cartTotal);
+  const sumTotal = useSelector(state => state.good.sumTotal);
 
   const classes = useStyles();
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -80,6 +81,7 @@ const Navbar = () => {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
+        {Number(sumTotal.toFixed(2))}
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={cartTotal} color="secondary">
             <Link className={classes.cartLink} to="cart">
@@ -103,6 +105,7 @@ const Navbar = () => {
           </Typography>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
+            {Number(sumTotal.toFixed(2))}
             <IconButton aria-label="show 17 new notifications" color="inherit">
               <Badge badgeContent={cartTotal} color="secondary">
                 <Link className={classes.cartLink} to="cart">

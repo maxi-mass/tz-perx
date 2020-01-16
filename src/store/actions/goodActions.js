@@ -2,13 +2,16 @@ import { LOAD_GOODS, REMOVE_FROM_CART, REMOVE_ALL_FROM_CART, ADD_TO_CART, LOAD_C
 
 export const loadCart = () => dispatch => {
   const saved = JSON.parse(localStorage.getItem("cart") || "[]");
-  let cartTotal = 0;
+  //let cartTotal = 0;
   let sumTotal = 0;
   saved.forEach(good => {
-    cartTotal += parseInt(good.qty);
+    //cartTotal += parseInt(good.qty);
     sumTotal += good.price;
   });
-
+  const cartTotal = saved.reduce((accumulator, current) => {
+    console.log(accumulator, current)
+  }, 0)
+  //console.log(cartTotal);
   dispatch({ type: LOAD_CART, payload: { cart: saved, cartTotal, sumTotal } })
 };
 

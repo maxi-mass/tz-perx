@@ -18,13 +18,14 @@ export const goodReducer = (state = initialState, action) => {
         }
         return good;
       });
+
       return isAdded
         ? { ...state, cart: updatedCart, cartTotal: state.cartTotal + 1 }
         : {
           ...state,
           cart: [{ ...action.payload, qty: 1 }, ...state.cart],
           cartTotal: state.cartTotal + 1,
-          sumTotal: state.sumTotal + action.payload.price
+          sumTotal: Number(state.sumTotal.toFixed(2)) + Number(action.payload.price.toFixed(2))
         };
     }
     case LOAD_CART: {
@@ -46,7 +47,7 @@ export const goodReducer = (state = initialState, action) => {
           return good;
         }),
         cartTotal: state.cartTotal - 1,
-        sumTotal: state.sumTotal - action.payload.price
+        sumTotal: Number(state.sumTotal.toFixed(2)) - Number(action.payload.price.toFixed(2))
       }
     }
     case REMOVE_ALL_FROM_CART: {
@@ -59,6 +60,7 @@ export const goodReducer = (state = initialState, action) => {
     }
     case LOAD_GOODS: {
       return state;
+
     }
     default:
       return state;
