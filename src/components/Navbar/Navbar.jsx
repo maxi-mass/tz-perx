@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -45,16 +46,15 @@ const useStyles = makeStyles(theme => ({
     [theme.breakpoints.up("md")]: {
       display: "none"
     }
+  },
+  cartLink: {
+    color: "#fff",
+    textDecoration: "none"
   }
 }));
 
 const Navbar = () => {
-  const [cartCount, setCartCount] = useState(0);
-  const cartItems = useSelector(state => state.good.cart).length;
-  useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem("cart") || "[]");
-    setCartCount(saved.length);
-  }, []);
+  const cartTotal = useSelector(state => state.good.cartTotal);
 
   const classes = useStyles();
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -81,11 +81,13 @@ const Navbar = () => {
     >
       <MenuItem>
         <IconButton aria-label="show 11 new notifications" color="inherit">
-          <Badge badgeContent={cartItems} color="secondary">
-            <ShoppingCartIcon />
+          <Badge badgeContent={cartTotal} color="secondary">
+            <Link className={classes.cartLink} to="cart">
+              <ShoppingCartIcon />
+            </Link>
           </Badge>
         </IconButton>
-        <p>Notifications</p>
+        <p>Корзина</p>
       </MenuItem>
     </Menu>
   );
@@ -95,13 +97,17 @@ const Navbar = () => {
       <AppBar position="static">
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
-            Home
+            <Link className={classes.cartLink} to="/">
+              Home
+            </Link>
           </Typography>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             <IconButton aria-label="show 17 new notifications" color="inherit">
-              <Badge badgeContent={cartItems} color="secondary">
-                <ShoppingCartIcon />
+              <Badge badgeContent={cartTotal} color="secondary">
+                <Link className={classes.cartLink} to="cart">
+                  <ShoppingCartIcon />
+                </Link>
               </Badge>
             </IconButton>
           </div>

@@ -24,20 +24,11 @@ const goods = [
 const Main = () => {
   const dispatch = useDispatch();
 
-  const [cart, setCart] = useState([]);
-
   useEffect(() => {
-    const saved = JSON.parse(localStorage.getItem("cart") || "[]");
-    setCart(saved);
-    dispatch(loadCart(saved));
+    dispatch(loadCart());
   }, []);
 
-  useEffect(() => {
-    localStorage.setItem("cart", JSON.stringify(cart));
-  }, [cart]);
-
   const addToCartHandler = good => {
-    setCart(prev => [good, ...prev]);
     dispatch(addToCart(good));
   };
 
