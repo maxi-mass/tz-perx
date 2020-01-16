@@ -7,20 +7,17 @@ const goods = [
   {
     name: "Python",
     price: 5.35,
-    image:
-      "https://imagefinder.co/storage/w1000/images/2019/01/picjumbo_ipad-tablet-and-macbook-laptop-workspace-from-above_free_stock_photos_picjumbo_hnck2126-2210x1474.jpg"
+    image: "https://murmuring-tor-81614.herokuapp.com/logo/python.png"
   },
   {
     name: "Go",
     price: 7.55,
-    image:
-      "https://imagefinder.co/storage/w1000/images/2019/01/goodfreephotos_working-on-laptop-and-mobile-devices.jpg"
+    image: "https://murmuring-tor-81614.herokuapp.com/logo/go.png"
   },
   {
     name: "Node.js",
     price: 9.99,
-    image:
-      "https://imagefinder.co/storage/w1000/images/2019/11/gratisography_5dd56ce89fb9ae79bf7e5792_gratisography-landscape-laptop-900x600.jpg"
+    image: "https://murmuring-tor-81614.herokuapp.com/logo/node.png"
   }
 ];
 
@@ -29,15 +26,15 @@ const Main = () => {
 
   const [cart, setCart] = useState([]);
 
-  // useEffect(() => {
-  //   const saved = JSON.parse(localStorage.getItem("cart") || []);
-  //   setCart(saved);
-  //   dispatch(loadCart(saved));
-  // }, []);
+  useEffect(() => {
+    const saved = JSON.parse(localStorage.getItem("cart") || "[]");
+    setCart(saved);
+    dispatch(loadCart(saved));
+  }, []);
 
-  // useEffect(() => {
-  //   localStorage.setItem("cart", JSON.stringify(cart));
-  // }, [cart]);
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
   const addToCartHandler = good => {
     setCart(prev => [good, ...prev]);
