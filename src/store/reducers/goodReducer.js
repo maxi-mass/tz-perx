@@ -1,4 +1,10 @@
-import { LOAD_GOODS, REMOVE_FROM_CART, REMOVE_ALL_FROM_CART, ADD_TO_CART, LOAD_CART } from "../types";
+import {
+  LOAD_GOODS,
+  REMOVE_FROM_CART,
+  REMOVE_ALL_FROM_CART,
+  ADD_TO_CART,
+  LOAD_CART
+} from "../types";
 
 const initialState = {
   cart: [],
@@ -22,11 +28,13 @@ export const goodReducer = (state = initialState, action) => {
       return isAdded
         ? { ...state, cart: updatedCart, cartTotal: state.cartTotal + 1 }
         : {
-          ...state,
-          cart: [{ ...action.payload, qty: 1 }, ...state.cart],
-          cartTotal: state.cartTotal + 1,
-          sumTotal: Number(state.sumTotal.toFixed(2)) + Number(action.payload.price.toFixed(2))
-        };
+            ...state,
+            cart: [{ ...action.payload, qty: 1 }, ...state.cart],
+            cartTotal: state.cartTotal + 1,
+            sumTotal:
+              Number(state.sumTotal.toFixed(2)) +
+              Number(action.payload.price.toFixed(2))
+          };
     }
     case LOAD_CART: {
       return {
@@ -37,7 +45,7 @@ export const goodReducer = (state = initialState, action) => {
       };
     }
     case REMOVE_FROM_CART: {
-      console.log(state.sumTotal, action.payload)
+      console.log(state.sumTotal, action.payload);
       return {
         ...state,
         cart: state.cart.map(good => {
@@ -47,8 +55,10 @@ export const goodReducer = (state = initialState, action) => {
           return good;
         }),
         cartTotal: state.cartTotal - 1,
-        sumTotal: Number(state.sumTotal.toFixed(2)) - Number(action.payload.price.toFixed(2))
-      }
+        sumTotal:
+          Number(state.sumTotal.toFixed(2)) -
+          Number(action.payload.price.toFixed(2))
+      };
     }
     case REMOVE_ALL_FROM_CART: {
       return {
@@ -56,11 +66,13 @@ export const goodReducer = (state = initialState, action) => {
         cart: [],
         cartTotal: 0,
         sumTotal: 0
-      }
+      };
     }
     case LOAD_GOODS: {
-      return state;
-
+      return {
+        ...state,
+        goods: action.payload
+      };
     }
     default:
       return state;
