@@ -32,7 +32,7 @@ const Main = () => {
                 <img src={IMAGE_BASE_URL + good.image} alt="image" />
               </div>
               <div>{good.name}</div>
-              <div>{good.price}</div>
+              <div>{good.price} $</div>
               <div className={styles.goods_list__add_to_cart}>
                 <AddShoppingCartIcon onClick={() => addToCartHandler(good)} />
               </div>

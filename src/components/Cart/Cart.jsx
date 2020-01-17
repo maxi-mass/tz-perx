@@ -1,16 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import styles from "./Cart.module.css";
-import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import { useDispatch, useSelector } from "react-redux";
 import {
   removeFromCart,
   removeAllFromCart,
-  loadCart
+  loadCart,
+  setQtyGoods
 } from "../../store/actions/goodActions";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
 import Button from "@material-ui/core/Button";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { IMAGE_BASE_URL } from "../../api";
+import TextField from "@material-ui/core/TextField";
 
 const Cart = () => {
   const sumTotal = useSelector(state => state.good.sumTotal);
@@ -24,6 +25,12 @@ const Cart = () => {
   const removeHandler = good => {
     dispatch(removeFromCart(good));
   };
+  const qtyChangeHandler = (e, good) => {
+    const qty = parseInt(e.target.value);
+    if (Number.isInteger(qty) && qty > 0) {
+      dispatch(setQtyGoods({ qty: parseInt(qty), name: good.name }));
+    }
+  };
 
   return (
     <div>
@@ -36,8 +43,14 @@ const Cart = () => {
                 <img src={IMAGE_BASE_URL + good.image} alt="image" />
               </div>
               <div>{good.name}</div>
-              <div>{good.price}</div>
-              <div>{good.qty}</div>
+              <div>{good.price} $</div>
+              <TextField
+                id="outlined-basic"
+                label="Количество"
+                variant="outlined"
+                value={good.qty}
+                onChange={e => qtyChangeHandler(e, good)}
+              />
               <div style={{ cursor: "pointer" }}>
                 <HighlightOffIcon onClick={() => removeHandler(good)} />
               </div>
@@ -48,7 +61,7 @@ const Cart = () => {
           <>
             <li className={styles.cart_sum}>
               <div>
-                Итого: <span>{Number(sumTotal.toFixed(2))}</span>
+                Итого: <span>{Number(sumTotal.toFixed(2))} $</span>
               </div>
             </li>
             <li>

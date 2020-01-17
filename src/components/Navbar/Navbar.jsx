@@ -81,7 +81,7 @@ const Navbar = () => {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        {Number(sumTotal.toFixed(2))}
+        {Number(sumTotal.toFixed(2))} $
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={cartTotal} color="secondary">
             <Link className={classes.cartLink} to="cart">
@@ -105,7 +105,7 @@ const Navbar = () => {
           </Typography>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
-            {sumTotal > 0 && Number(sumTotal.toFixed(2))}
+            {sumTotal > 0 && Number(sumTotal.toFixed(2)) + " $"}
             <IconButton aria-label="show 17 new notifications" color="inherit">
               <Badge badgeContent={cartTotal} color="secondary">
                 <Link className={classes.cartLink} to="cart">

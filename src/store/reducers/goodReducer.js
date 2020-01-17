@@ -26,15 +26,19 @@ export const goodReducer = (state = initialState, action) => {
       });
 
       return isAdded
-        ? { ...state, cart: updatedCart, cartTotal: state.cartTotal + 1 }
+        ? {
+          ...state, cart: updatedCart, cartTotal: state.cartTotal + 1, sumTotal:
+            Number(state.sumTotal.toFixed(2)) +
+            Number(action.payload.price.toFixed(2))
+        }
         : {
-            ...state,
-            cart: [{ ...action.payload, qty: 1 }, ...state.cart],
-            cartTotal: state.cartTotal + 1,
-            sumTotal:
-              Number(state.sumTotal.toFixed(2)) +
-              Number(action.payload.price.toFixed(2))
-          };
+          ...state,
+          cart: [{ ...action.payload, qty: 1 }, ...state.cart],
+          cartTotal: state.cartTotal + 1,
+          sumTotal:
+            Number(state.sumTotal.toFixed(2)) +
+            Number(action.payload.price.toFixed(2))
+        };
     }
     case LOAD_CART: {
       return {
