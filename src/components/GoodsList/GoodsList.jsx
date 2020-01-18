@@ -2,11 +2,13 @@ import React from "react";
 import styles from "./GoodsList.module.css";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import { IMAGE_BASE_URL } from "../../api";
+import LinearProgress from "@material-ui/core/LinearProgress";
 
 const GoodsList = ({ goods, addToCartHandler }) => {
   return (
     <div>
       <h2>Список товаров</h2>
+      {goods.length === 0 && <LinearProgress />}
       <ul className={styles.goods_list}>
         {goods.map(good => {
           return (

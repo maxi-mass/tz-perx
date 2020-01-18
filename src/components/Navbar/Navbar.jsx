@@ -1,7 +1,8 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
+import styles from "./Navbar.module.css";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
@@ -21,7 +22,8 @@ const useStyles = makeStyles(theme => ({
     display: "none",
     [theme.breakpoints.up("sm")]: {
       display: "block"
-    }
+    },
+    marginRight: "20px"
   },
 
   inputRoot: {
@@ -39,7 +41,8 @@ const useStyles = makeStyles(theme => ({
     display: "none",
     [theme.breakpoints.up("md")]: {
       display: "flex"
-    }
+    },
+    fontWeight: "bold"
   },
   sectionMobile: {
     display: "flex",
@@ -50,6 +53,14 @@ const useStyles = makeStyles(theme => ({
   cartLink: {
     color: "#fff",
     textDecoration: "none"
+  },
+  menuItem: {
+    color: "#fff",
+    textDecoration: "none"
+  },
+  activeMenuItem: {
+    fontWeight: "bold",
+    textDecoration: "underline"
   }
 }));
 
@@ -84,9 +95,9 @@ const Navbar = () => {
         {Number(sumTotal.toFixed(2))} $
         <IconButton aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={cartTotal} color="secondary">
-            <Link className={classes.cartLink} to="cart">
+            <NavLink className={classes.cartLink} to="cart">
               <ShoppingCartIcon />
-            </Link>
+            </NavLink>
           </Badge>
         </IconButton>
         <p>Корзина</p>
@@ -99,18 +110,32 @@ const Navbar = () => {
       <AppBar position="static">
         <Toolbar>
           <Typography className={classes.title} variant="h6" noWrap>
-            <Link className={classes.cartLink} to="/">
-              Home
-            </Link>
+            <NavLink
+              exact
+              className={classes.menuItem}
+              activeClassName={classes.activeMenuItem}
+              to="/"
+            >
+              Список товаров
+            </NavLink>
+          </Typography>
+          <Typography className={classes.title} variant="h6" noWrap>
+            <NavLink
+              className={classes.menuItem}
+              activeClassName={classes.activeMenuItem}
+              to="/cart"
+            >
+              Корзина
+            </NavLink>
           </Typography>
           <div className={classes.grow} />
           <div className={classes.sectionDesktop}>
             {sumTotal > 0 && Number(sumTotal.toFixed(2)) + " $"}
             <IconButton aria-label="show 17 new notifications" color="inherit">
               <Badge badgeContent={cartTotal} color="secondary">
-                <Link className={classes.cartLink} to="cart">
+                <NavLink className={classes.cartLink} to="cart">
                   <ShoppingCartIcon />
-                </Link>
+                </NavLink>
               </Badge>
             </IconButton>
           </div>

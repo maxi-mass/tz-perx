@@ -1,0 +1,7 @@
+a.menu_item {
+  color: "#fff";
+  text-decoration: none;
+}
+.active_item {
+  font-weight: bold;
+}

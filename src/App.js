@@ -1,4 +1,5 @@
 import React from "react";
+import "./App.css";
 import { Switch, Route } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -9,7 +10,7 @@ import Goods from "./pages/Goods";
 
 const App = () => {
   return (
-    <div>
+    <div className="app-wrapper">
       <Navbar />
       <>
         <CssBaseline />
