@@ -1,8 +1,8 @@
 import React from "react";
 import styles from "./GoodsList.module.css";
-import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import { IMAGE_BASE_URL } from "../../api";
 import LinearProgress from "@material-ui/core/LinearProgress";
+import AddToCartIcon from "../common/AddToCartIcon/AddToCartIcon";
 
 const GoodsList = ({ goods, addToCartHandler }) => {
   return (
@@ -18,9 +18,7 @@ const GoodsList = ({ goods, addToCartHandler }) => {
               </div>
               <div>{good.name}</div>
               <div>{good.price} $</div>
-              <div className={styles.goods_list__add_to_cart}>
-                <AddShoppingCartIcon onClick={() => addToCartHandler(good)} />
-              </div>
+              <AddToCartIcon onPress={() => addToCartHandler(good)} />
             </li>
           );
         })}

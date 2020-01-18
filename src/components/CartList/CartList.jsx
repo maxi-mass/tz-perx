@@ -1,10 +1,9 @@
 import React from "react";
 import styles from "./CartList.module.css";
-import HighlightOffIcon from "@material-ui/icons/HighlightOff";
-import Button from "@material-ui/core/Button";
-import DeleteIcon from "@material-ui/icons/Delete";
-import TextField from "@material-ui/core/TextField";
 import { IMAGE_BASE_URL } from "../../api";
+import RemoveFromCartIcon from "../common/RemoveFromCartIcon/RemoveFromCartIcon";
+import TextInput from "../common/TextInput/TextInput";
+import Button from "../common/Button/Button";
 
 const CartList = ({
   cart,
@@ -26,17 +25,12 @@ const CartList = ({
               </div>
               <div>{good.name}</div>
               <div>{good.price} $</div>
-              <TextField
-                id="outlined-basic"
+              <TextInput
                 value={good.qty}
-                variant="outlined"
                 onChange={e => qtyChangeHandler(e, good)}
                 onBlur={() => onBlurHandler(good)}
-                className={styles.cart_item_qty}
               />
-              <div style={{ cursor: "pointer" }}>
-                <HighlightOffIcon onClick={() => removeHandler(good)} />
-              </div>
+              <RemoveFromCartIcon onPress={() => removeHandler(good)} />
             </li>
           );
         })}
@@ -49,13 +43,10 @@ const CartList = ({
             </li>
             <li>
               <Button
-                variant="outlined"
-                color="secondary"
-                startIcon={<DeleteIcon />}
-                onClick={removeAllFromCartHandler}
-              >
-                Очистить корзину
-              </Button>
+                onPress={removeAllFromCartHandler}
+                color={"#b71c1c"}
+                text={"Очистить корзину"}
+              />
             </li>
           </>
         )}
