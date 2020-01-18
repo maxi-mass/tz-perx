@@ -4,9 +4,8 @@ import Navbar from "./components/Navbar/Navbar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Container from "@material-ui/core/Container";
 import Typography from "@material-ui/core/Typography";
-import Main from "./components/Main/Main";
-import Cart from "./components/Cart/Cart";
-
+import Cart from "./pages/Cart";
+import Goods from "./pages/Goods";
 
 const App = () => {
   return (
@@ -17,7 +16,7 @@ const App = () => {
         <Container maxWidth="sm">
           <Typography component="div" style={{ paddingTop: "15px" }} />
           <Switch>
-            <Route path="/" component={Main} exact />
+            <Route path="/" component={Goods} exact />
             <Route path="/cart" component={Cart} />
           </Switch>
         </Container>

@@ -12,7 +12,8 @@ export const loadCart = () => dispatch => {
   let cartTotal = 0;
   let sumTotal = 0;
   saved.forEach(good => {
-    cartTotal += parseInt(good.qty);
+    const qty = good.qty === '' ? 0 : good.qty
+    cartTotal += parseInt(qty);
     sumTotal += good.price * good.qty;
   });
 
@@ -43,17 +44,11 @@ export const addToCart = payload => dispatch => {
 
 export const removeFromCart = payload => dispatch => {
   const saved = JSON.parse(localStorage.getItem("cart") || "[]");
-  const updatedCartStorage = saved.map(good => {
-    if (good.name === payload.name && good.qty > 0) {
-      good.qty = good.qty - 1;
-    }
-    return good;
-  });
-  const filterCartStorage = updatedCartStorage.filter(good => good.qty > 0)
+  const filterCartStorage = saved.filter(good => good.name !== payload.name);
   localStorage.setItem("cart", JSON.stringify(filterCartStorage));
 
   dispatch({ type: REMOVE_FROM_CART, payload });
-  dispatch(loadCart())
+  dispatch(loadCart());
 };
 
 export const removeAllFromCart = () => dispatch => {
@@ -69,11 +64,11 @@ export const loadGoods = () => async dispatch => {
 export const setQtyGoods = payload => dispatch => {
   const saved = JSON.parse(localStorage.getItem("cart") || "[]");
   const updatedCartStorage = saved.map(good => {
-    if (good.name === payload.name && good.qty > 0) {
+    if (good.name === payload.name) {
       good.qty = payload.qty;
     }
     return good;
   });
   localStorage.setItem("cart", JSON.stringify(updatedCartStorage));
-  dispatch(loadCart())
-}
+  dispatch(loadCart());
+};

@@ -32,14 +32,20 @@
   margin-top: 30px;
 
   border-bottom: 2px solid #9e9797;
-
 }
 
-.cart_sum>div {
+.cart_sum > div {
   text-align: right;
 }
 
-.cart_sum>div span {
+.cart_sum > div span {
   font-size: 1.3rem;
   font-weight: bold;
+}
+
+.cart_item input {
+  font-size: 15px;
+  width: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }

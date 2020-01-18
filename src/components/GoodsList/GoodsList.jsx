@@ -1,26 +1,9 @@
-import React, { useState, useEffect } from "react";
-import styles from "./Main.module.css";
+import React from "react";
+import styles from "./GoodsList.module.css";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addToCart,
-  loadCart,
-  loadGoods
-} from "../../store/actions/goodActions";
 import { IMAGE_BASE_URL } from "../../api";
 
-const Main = () => {
-  const dispatch = useDispatch();
-  const goods = useSelector(state => state.good.goods);
-  useEffect(() => {
-    dispatch(loadCart());
-    dispatch(loadGoods());
-  }, []);
-
-  const addToCartHandler = good => {
-    dispatch(addToCart(good));
-  };
-
+const GoodsList = ({ goods, addToCartHandler }) => {
   return (
     <div>
       <h2>Список товаров</h2>
@@ -29,7 +12,7 @@ const Main = () => {
           return (
             <li key={good.name} className={styles.good_item}>
               <div>
-                <img src={IMAGE_BASE_URL + good.image} alt="image" />
+                <img src={IMAGE_BASE_URL + good.image} alt="good" />
               </div>
               <div>{good.name}</div>
               <div>{good.price} $</div>
@@ -44,4 +27,4 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default GoodsList;
